@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selene Experiences — Curaduría de Viajes de Lujo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ──────────────────────────────────────────────
+       SELENE DESIGN SYSTEM — BLANCO, GRIS Y NEGRO
+       Paleta monocromática de lujo editorial.
+       Sin colores. Solo la fuerza del contraste.
+    ────────────────────────────────────────────── */
+    :root {
+      /* ── Fondos ── */
+      --s-noche:      #0D0D0D;   /* negro editorial */
+      --s-profundo:   #141414;   /* sección alternada */
+      --s-oscuro:     #1C1C1C;   /* fondo terciario */
+      --s-medio:      #252525;   /* tarjetas / hover */
+
+      /* ── Acentos (solo en detalles) ── */
+      --s-pampa:      #C8C8C8;   /* gris claro — reemplaza el oro */
+      --s-trigo:      #DEDEDE;   /* hover */
+      --s-arena:      #EFEFEF;   /* casi blanco cálido */
+
+      /* ── Estas variables ya no usaremos como color, apuntan a neutros ── */
+      --s-celeste:    #A0A0A0;
+      --s-cielo:      #B8B8B8;
+      --s-glaciar:    #D0D0D0;
+
+      --s-malbec:     #2A2A2A;
+      --s-bordo:      #404040;
+
+      /* ── TEXTOS ── */
+      --s-marfil:     #F5F5F5;   /* blanco principal */
+      --s-nieve:      #D8D8D8;   /* texto corrido — gris muy claro */
+      --s-niebla:     #A8A8A8;   /* texto de apoyo */
+      --s-piedra:     #707070;   /* etiquetas / muted */
+
+      /* ── Typography ── */
+      --font-serif:   'Cormorant Garamond', Georgia, serif;
+      --font-sc:      'Cormorant SC', Georgia, serif;
+      --font-sans:    'Jost', system-ui, sans-serif;
+
+      /* ── Spacing ── */
+      --sp-lg:  4rem;
+      --sp-xl:  8rem;
+
+      /* ── Motion ── */
+      --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --dur-slow: 900ms;
+      --dur-med:  500ms;
+    }
+
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background-color: var(--s-noche);
+      color: var(--s-nieve);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--s-pampa); color: var(--s-noche); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.75rem 4rem;
+      transition: background var(--dur-med) var(--ease-luxury),
+                  padding var(--dur-med) var(--ease-luxury);
+    }
+    nav.scrolled {
+      background: rgba(8,12,18,0.95);
+      backdrop-filter: blur(14px);
+      padding: 1.1rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-family: var(--font-sc);
+      font-size: 1rem; font-weight: 400;
+      letter-spacing: 0.38em; color: var(--s-marfil);
+      text-decoration: none; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 3rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-sc); font-size: 0.7rem; font-weight: 300;
+      letter-spacing: 0.25em; color: var(--s-niebla);
+      text-decoration: none; text-transform: uppercase;
+      transition: color var(--dur-med);
+    }
+    .nav-links a:hover { color: var(--s-marfil); }
+    .nav-cta {
+      color: var(--s-marfil) !important;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.55rem 1.5rem;
+      transition: border-color var(--dur-med), background var(--dur-med) !important;
+    }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.1) !important;
+      border-color: rgba(255,255,255,0.6) !important;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 0 4rem 7rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(8,12,18,0.25) 0%,
+          rgba(8,12,18,0.05) 25%,
+          rgba(8,12,18,0.55) 65%,
+          rgba(8,12,18,1) 100%),
+        /* Fitz Roy / El Chaltén — Patagonia */
+        url('https://images.unsplash.com/photo-1637580980556-085dee659c7e?w=1900&q=85&auto=format&fit=crop&crop=center') center/cover no-repeat;
+    }
+    .hero-bg-fallback {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 55% 35%, #1C2D40 0%, #0D1520 55%, #080C12 100%);
+      z-index: -1;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+    .hero-eyebrow {
+      font-family: var(--font-sc); font-size: 0.68rem;
+      letter-spacing: 0.42em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 1.2s var(--ease-luxury) 0.3s forwards;
+    }
+    h1.hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 300; line-height: 1.07; letter-spacing: -0.01em;
+      color: var(--s-marfil); margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 1.2s var(--ease-luxury) 0.55s forwards;
+    }
+    h1.hero-title em { font-style: italic; color: var(--s-arena); }
+    .hero-subtitle {
+      font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em;
+      color: var(--s-nieve); max-width: 520px; margin-bottom: 3rem; line-height: 1.9;
+      opacity: 0; animation: fadeUp 1.2s var(--ease-luxury) 0.8s forwards;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-sc); font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--s-noche); background: var(--s-marfil);
+      padding: 1.1rem 2.8rem; text-decoration: none;
+      transition: background var(--dur-med) var(--ease-luxury), transform var(--dur-med) var(--ease-luxury);
+      opacity: 0; animation: fadeUp 1.2s var(--ease-luxury) 1.05s forwards;
+    }
+    .btn-primary:hover { background: var(--s-nieve); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block;
+      font-family: var(--font-sc); font-size: 0.67rem; font-weight: 300;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--s-niebla); border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding-bottom: 2px; text-decoration: none; margin-left: 2rem;
+      transition: color var(--dur-med), border-color var(--dur-med);
+      opacity: 0; animation: fadeUp 1.2s var(--ease-luxury) 1.2s forwards;
+    }
+    .btn-ghost:hover { color: var(--s-marfil); border-color: var(--s-marfil); }
+
+    /* celeste line detail */
+    .hero-line {
+      position: absolute; right: 4rem; bottom: 5rem; z-index: 2;
+      display: flex; align-items: center; gap: 1rem;
+      opacity: 0; animation: fadeIn 1.5s var(--ease-luxury) 1.8s forwards;
+    }
+    .hl-bar {
+      width: 52px; height: 1px; background: var(--s-celeste);
+    }
+    .hl-label {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.3em; color: var(--s-piedra); text-transform: uppercase;
+    }
+
+    /* ─── SECTION UTILS ─── */
+    section { position: relative; }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+    .eyebrow {
+      font-family: var(--font-sc); font-size: 0.67rem;
+      letter-spacing: 0.42em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    h2.section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 300; line-height: 1.14; letter-spacing: -0.01em;
+      color: var(--s-marfil); margin-bottom: 2.5rem;
+    }
+    h2.section-title em { font-style: italic; color: var(--s-arena); }
+    .body-text {
+      font-size: 0.97rem; font-weight: 300;
+      color: var(--s-nieve); line-height: 2;
+      margin-bottom: 1.5rem;
+    }
+    .body-text strong { font-weight: 400; color: var(--s-marfil); }
+    .sep { width: 100%; height: 1px; background: rgba(255,255,255,0.08); }
+
+    /* ─── HERO GALLERY STRIP ─── */
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      height: 320px;
+      gap: 3px;
+      background: var(--s-noche);
+    }
+    .gs-item { overflow: hidden; position: relative; }
+    .gs-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.75) brightness(0.8);
+      transition: filter var(--dur-slow) var(--ease-luxury), transform var(--dur-slow) var(--ease-luxury);
+    }
+    .gs-item:hover img { filter: saturate(1) brightness(0.95); transform: scale(1.05); }
+    .gs-item::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 90px;
+      background: linear-gradient(to top, rgba(8,12,18,0.75) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .gs-item .gs-label {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      font-family: var(--font-sc); font-size: 0.68rem;
+      letter-spacing: 0.3em; color: rgba(245,245,245,0.98);
+      text-transform: uppercase; z-index: 2;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    }
+
+    /* ─── MANIFESTO ─── */
+    #manifesto { background: var(--s-noche); padding: var(--sp-xl) 0; }
+    .manifesto-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 8rem; align-items: start;
+    }
+    .manifesto-quote {
+      border-left: 2px solid var(--s-celeste);
+      padding: 2rem 0 2rem 2.5rem; margin-top: 2rem;
+    }
+    .manifesto-quote p {
+      font-family: var(--font-serif); font-size: 1.4rem;
+      font-weight: 300; font-style: italic; line-height: 1.65;
+      color: var(--s-marfil);
+    }
+    .stat-block { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 2rem; margin-top: 3rem; }
+    .stat-number {
+      font-family: var(--font-serif); font-size: 4.5rem;
+      font-weight: 300; color: var(--s-niebla);
+      line-height: 1; letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-family: var(--font-sc); font-size: 0.65rem;
+      letter-spacing: 0.3em; color: var(--s-piedra);
+      text-transform: uppercase; margin-top: 0.5rem;
+    }
+    .pillars { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+    .pillar {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color var(--dur-med) var(--ease-luxury),
+                  background var(--dur-med) var(--ease-luxury);
+    }
+    .pillar:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.03); }
+    .pillar-num {
+      font-family: var(--font-serif); font-size: 2rem;
+      font-weight: 300; color: rgba(255,255,255,0.22);
+      line-height: 1; flex-shrink: 0; width: 2.5rem;
+    }
+    .pillar-title {
+      font-family: var(--font-sc); font-size: 0.75rem;
+      letter-spacing: 0.25em; color: var(--s-cielo);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .pillar-text { font-size: 0.88rem; font-weight: 300; color: var(--s-nieve); line-height: 1.95; }
+
+    /* ─── PHOTO SECTION: FULL WIDTH ─── */
+    .photo-section {
+      position: relative; height: 520px; overflow: hidden;
+    }
+    .photo-section img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.8) brightness(0.75);
+    }
+    .photo-section .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(8,12,18,0.72) 0%,
+        rgba(8,12,18,0.2) 55%,
+        rgba(8,12,18,0.05) 100%);
+      display: flex; align-items: center;
+    }
+    .photo-section .overlay-text {
+      padding: 0 6rem;
+    }
+    .photo-section .overlay-eyebrow {
+      font-family: var(--font-sc); font-size: 0.65rem;
+      letter-spacing: 0.4em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .photo-section .overlay-title {
+      font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; font-style: italic;
+      color: var(--s-marfil); line-height: 1.2; max-width: 560px;
+    }
+    .photo-section .overlay-sub {
+      font-size: 0.88rem; font-weight: 300; color: var(--s-glaciar);
+      margin-top: 1.25rem; max-width: 420px; line-height: 1.9;
+    }
+    /* celeste accent bar on photo section */
+    .photo-section .celeste-bar {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--s-celeste);
+    }
+
+    /* ─── COLLECTIONS ─── */
+    #collections { background: var(--s-profundo); padding: var(--sp-xl) 0; }
+    .collections-intro { max-width: 640px; margin-bottom: var(--sp-lg); }
+    .collections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); }
+    .collection-card {
+      background: var(--s-profundo); padding: 3rem 2.5rem; position: relative; overflow: hidden;
+      transition: background var(--dur-med) var(--ease-luxury);
+      cursor: default;
+    }
+    .collection-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+      opacity: 0; transition: opacity var(--dur-med) var(--ease-luxury);
+    }
+    .collection-card:hover::before { opacity: 1; }
+    .collection-card:hover { background: var(--s-oscuro); }
+    .card-num {
+      font-family: var(--font-serif); font-size: 3.5rem;
+      font-weight: 300; color: rgba(255,255,255,0.06);
+      line-height: 1; margin-bottom: 2rem;
+    }
+    .card-label {
+      font-family: var(--font-sc); font-size: 0.63rem;
+      letter-spacing: 0.35em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .card-title {
+      font-family: var(--font-serif); font-size: 1.6rem;
+      font-weight: 300; color: var(--s-marfil);
+      line-height: 1.25; margin-bottom: 1.25rem;
+    }
+    .card-text { font-size: 0.88rem; font-weight: 300; color: var(--s-nieve); line-height: 1.95; }
+    .card-arrow {
+      margin-top: 2.5rem;
+      font-family: var(--font-sc); font-size: 0.63rem;
+      letter-spacing: 0.28em; color: rgba(255,255,255,0.3);
+      text-transform: uppercase; display: flex; align-items: center; gap: 0.75rem;
+      transition: color var(--dur-med);
+    }
+    .collection-card:hover .card-arrow { color: var(--s-cielo); }
+    .card-arrow::after { content: '→'; font-family: sans-serif; font-size: 0.9rem; }
+    /* Malbec accent on collections */
+    .card-malbec .card-num { color: rgba(255,255,255,0.07); }
+    .card-malbec .card-arrow { color: rgba(255,255,255,0.3); }
+    .card-malbec:hover .card-arrow { color: var(--s-marfil); }
+
+    /* ─── DESTINATIONS ─── */
+    #destinations { background: var(--s-noche); padding: var(--sp-xl) 0 0; }
+    .dest-header { margin-bottom: var(--sp-lg); max-width: 560px; }
+    .dest-list { display: flex; flex-direction: column; }
+
+    .dest-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden; min-height: 400px;
+      transition: border-color var(--dur-med);
+    }
+    .dest-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .dest-item:hover { border-color: rgba(255,255,255,0.22); }
+    .dest-image { position: relative; overflow: hidden; }
+    .dest-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.72) brightness(0.82);
+      transition: filter var(--dur-slow) var(--ease-luxury), transform var(--dur-slow) var(--ease-luxury);
+    }
+    .dest-item:hover .dest-image img { filter: saturate(0.95) brightness(0.95); transform: scale(1.04); }
+
+    /* celeste accent overlay on dest images */
+    .dest-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(8,12,18,0.55) 100%);
+    }
+    .dest-content {
+      padding: 3.5rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+      background: var(--s-noche);
+    }
+    .dest-item.reverse .dest-image { order: 2; }
+    .dest-item.reverse .dest-content { order: 1; }
+    .dest-num {
+      font-family: var(--font-serif); font-size: 4rem;
+      font-weight: 300; color: rgba(255,255,255,0.07);
+      line-height: 1; margin-bottom: 1.5rem;
+    }
+    .dest-name {
+      font-family: var(--font-serif); font-size: 2.4rem;
+      font-weight: 300; color: var(--s-marfil);
+      line-height: 1.15; margin-bottom: 0.4rem;
+    }
+    .dest-region {
+      font-family: var(--font-sc); font-size: 0.63rem;
+      letter-spacing: 0.35em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 1.75rem;
+    }
+    .dest-text {
+      font-size: 0.93rem; font-weight: 300;
+      color: var(--s-nieve); line-height: 2; max-width: 430px;
+    }
+    .dest-tags { margin-top: 1.75rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--font-sc); font-size: 0.58rem;
+      letter-spacing: 0.22em; color: var(--s-piedra);
+      border: 1px solid rgba(255,255,255,0.2); padding: 0.3rem 0.85rem;
+      text-transform: uppercase;
+    }
+    /* Malbec variant tags for Mendoza */
+    .tag-malbec {
+      border-color: rgba(255,255,255,0.2) !important;
+      color: var(--s-niebla) !important;
+    }
+    /* Celeste variant tags for BA */
+    .tag-celeste {
+      border-color: rgba(255,255,255,0.2) !important;
+      color: var(--s-niebla) !important;
+    }
+
+    /* ─── INTERLUDE PHOTO STRIP ─── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      height: 280px; gap: 3px;
+    }
+    .ps-item { overflow: hidden; position: relative; }
+    .ps-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.65) brightness(0.75);
+      transition: filter 0.7s var(--ease-luxury);
+    }
+    .ps-item:hover img { filter: saturate(0.9) brightness(0.9); }
+    .ps-label {
+      position: absolute; bottom: 1rem; left: 1.25rem;
+      font-family: var(--font-sc); font-size: 0.57rem;
+      letter-spacing: 0.28em; color: rgba(216,227,236,0.6);
+      text-transform: uppercase;
+    }
+
+    /* ─── PROCESS ─── */
+    #proceso { background: var(--s-oscuro); padding: var(--sp-xl) 0; }
+    .process-header { max-width: 520px; margin-bottom: var(--sp-lg); }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+    .process-steps::before {
+      content: ''; position: absolute; top: 0.45rem; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255,255,255,0.08));
+    }
+    .step { padding: 0 2rem 0 0; }
+    .step-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--s-marfil); margin-bottom: 2.5rem; position: relative; z-index: 1;
+    }
+    .step-num {
+      font-family: var(--font-serif); font-size: 3rem;
+      font-weight: 300; color: rgba(255,255,255,0.07);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .step-title {
+      font-family: var(--font-serif); font-size: 1.4rem;
+      font-weight: 300; font-style: italic;
+      color: var(--s-arena); margin-bottom: 1rem; line-height: 1.3;
+    }
+    .step-text { font-size: 0.88rem; font-weight: 300; color: var(--s-nieve); line-height: 1.95; }
+
+    /* ─── CONTACT ─── */
+    #contacto {
+      position: relative; overflow: hidden;
+      padding: var(--sp-xl) 0;
+    }
+    .contacto-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(8,12,18,0.85) 0%, rgba(8,12,18,0.88) 100%),
+        url('https://images.unsplash.com/photo-1709483076536-caf837728ced?w=1600&q=80&auto=format&fit=crop&crop=center') center/cover no-repeat;
+    }
+    /* Estancia / pampa Argentina */
+    .contact-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; padding: 0 4rem; text-align: center; }
+    .contact-ornament {
+      width: 1px; height: 64px;
+      background: linear-gradient(to bottom, transparent, var(--s-celeste));
+      margin: 0 auto 3rem;
+    }
+    h2.contact-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--s-marfil); margin-bottom: 1.5rem;
+    }
+    h2.contact-title em { font-style: italic; color: var(--s-arena); }
+    .contact-text {
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--s-nieve); line-height: 2; margin-bottom: 3.5rem;
+    }
+    .contact-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .contact-detail { margin-top: 4rem; display: flex; gap: 4rem; justify-content: center; }
+    .detail-label {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.35em; color: var(--s-piedra);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .detail-value { font-size: 0.9rem; font-weight: 300; color: var(--s-nieve); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--s-noche);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--font-sc); font-size: 0.85rem;
+      letter-spacing: 0.38em; color: var(--s-piedra); text-transform: uppercase;
+    }
+    .footer-celeste {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .fc-bar { width: 24px; height: 1px; background: rgba(255,255,255,0.2); }
+    .footer-copy {
+      font-family: var(--font-sc); font-size: 0.58rem;
+      letter-spacing: 0.2em; color: rgba(255,255,255,0.3);
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.25em; color: var(--s-piedra);
+      text-decoration: none; text-transform: uppercase;
+      transition: color var(--dur-med);
+    }
+    .footer-links a:hover { color: var(--s-marfil); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.9s var(--ease-luxury), transform 0.9s var(--ease-luxury);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ─── RESPONSIVE ─── */
+    /* ─── CONTACT FORM ─── */
+    .contact-form {
+      width: 100%; max-width: 680px;
+      margin: 3.5rem auto 0;
+      text-align: left;
+    }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
+    }
+    .form-group { position: relative; margin-bottom: 2.5rem; }
+    .form-group label {
+      display: block;
+      font-family: var(--font-sc); font-size: 0.57rem;
+      letter-spacing: 0.38em; color: var(--s-piedra);
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1px solid rgba(255,255,255,0.18);
+      padding: 0.55rem 0;
+      font-family: var(--font-sans); font-size: 0.9rem; font-weight: 300;
+      color: var(--s-marfil); outline: none;
+      transition: border-color var(--dur-med) var(--ease-luxury);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-bottom-color: rgba(255,255,255,0.7); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--s-piedra); }
+    .form-group textarea { resize: none; height: 88px; line-height: 1.9; }
+
+    .form-checks-group { margin-bottom: 2.5rem; }
+    .form-checks-label {
+      display: block;
+      font-family: var(--font-sc); font-size: 0.57rem;
+      letter-spacing: 0.38em; color: var(--s-piedra);
+      text-transform: uppercase; margin-bottom: 1.1rem;
+    }
+    .form-checks { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+    .form-check { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
+    .form-check input[type="checkbox"] { display: none; }
+    .check-box {
+      width: 15px; height: 15px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.22);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color var(--dur-med), background var(--dur-med);
+    }
+    .form-check:hover .check-box { border-color: rgba(255,255,255,0.55); }
+    .form-check input[type="checkbox"]:checked ~ .check-box {
+      background: var(--s-marfil); border-color: var(--s-marfil);
+    }
+    .form-check input[type="checkbox"]:checked ~ .check-box::after {
+      content: ''; width: 5px; height: 5px; background: var(--s-noche);
+    }
+    .check-text {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.2em; color: var(--s-niebla);
+      text-transform: uppercase;
+    }
+    .btn-submit {
+      display: block; width: 100%; margin-top: 0.5rem;
+      font-family: var(--font-sc); font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--s-noche); background: var(--s-marfil);
+      border: none; padding: 1.2rem; cursor: pointer;
+      transition: background var(--dur-med) var(--ease-luxury);
+    }
+    .btn-submit:hover { background: var(--s-nieve); }
+    .form-divider {
+      width: 100%; height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 3rem 0 2.5rem;
+    }
+
+    /* ─── SELENE (FOUNDER) ─── */
+    #selene { background: var(--s-profundo); padding: var(--sp-xl) 0; }
+    .selene-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .selene-image {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4 / 5;
+    }
+    .selene-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.85) brightness(0.92);
+      transition: filter var(--dur-slow) var(--ease-luxury), transform var(--dur-slow) var(--ease-luxury);
+    }
+    .selene-image:hover img { filter: saturate(1) brightness(1); transform: scale(1.02); }
+    .selene-image::after {
+      content: ''; position: absolute; left: 0; bottom: 0;
+      width: 3px; height: 60px; background: var(--s-celeste);
+    }
+    .selene-content { padding: 1rem 0; }
+    .selene-signature {
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .sig-line {
+      width: 40px; height: 1px; background: var(--s-marfil);
+      margin-bottom: 1.25rem;
+    }
+    .sig-name {
+      font-family: var(--font-serif); font-size: 1.4rem;
+      font-weight: 300; font-style: italic;
+      color: var(--s-marfil); margin-bottom: 0.3rem;
+    }
+    .sig-role {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.3em; color: var(--s-piedra);
+      text-transform: uppercase;
+    }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(8,12,18,0.88);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--dur-med) var(--ease-luxury);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--s-profundo);
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 720px; width: 100%;
+      padding: 3.5rem 4rem;
+      position: relative;
+      transform: translateY(28px);
+      transition: transform var(--dur-slow) var(--ease-luxury);
+      max-height: 92vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.75rem; right: 2rem;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-sc); font-size: 0.58rem;
+      letter-spacing: 0.3em; color: var(--s-piedra);
+      text-transform: uppercase;
+      transition: color var(--dur-med);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .modal-close:hover { color: var(--s-marfil); }
+    .modal-close::after { content: '×'; font-family: sans-serif; font-size: 1.4rem; line-height: 1; }
+    .modal-eyebrow {
+      font-family: var(--font-sc); font-size: 0.6rem;
+      letter-spacing: 0.42em; color: var(--s-niebla);
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .modal-title {
+      font-family: var(--font-serif); font-size: 2rem;
+      font-weight: 300; color: var(--s-marfil);
+      line-height: 1.2; margin-bottom: 0.4rem;
+    }
+    .modal-title em { font-style: italic; color: var(--s-arena); }
+    .modal-sub {
+      font-size: 0.88rem; font-weight: 300;
+      color: var(--s-nieve); margin-bottom: 2.5rem; line-height: 1.9;
+      border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2rem;
+    }
+
+    /* gs-item clickeable */
+    .gs-item a { display: block; width: 100%; height: 100%; }
+
+    /* card-arrow como botón */
+    .card-arrow-btn {
+      margin-top: 2.5rem; background: none; border: none; cursor: pointer; padding: 0;
+      font-family: var(--font-sc); font-size: 0.63rem;
+      letter-spacing: 0.28em; color: rgba(255,255,255,0.3);
+      text-transform: uppercase; display: flex; align-items: center; gap: 0.75rem;
+      transition: color var(--dur-med);
+    }
+    .collection-card:hover .card-arrow-btn { color: var(--s-cielo); }
+    .card-malbec:hover .card-arrow-btn { color: var(--s-marfil); }
+    .card-arrow-btn::after { content: '→'; font-family: sans-serif; font-size: 0.9rem; }
+
+    @media (max-width: 1024px) {
+      nav { padding: 1.5rem 2rem; }
+      nav.scrolled { padding: 1rem 2rem; }
+      .nav-links { display: none; }
+      #hero { padding: 0 2rem 5rem; }
+      .section-inner { padding: 0 2rem; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .collections-grid { grid-template-columns: 1fr; }
+      .dest-item { grid-template-columns: 1fr; }
+      .dest-item.reverse .dest-image { order: 0; }
+      .dest-item.reverse .dest-content { order: 0; }
+      .dest-image { min-height: 280px; }
+      .dest-content { padding: 2.5rem 2rem; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .process-steps::before { display: none; }
+      .gallery-strip { grid-template-columns: 1fr; height: auto; }
+      .gs-item { height: 220px; }
+      .photo-strip { grid-template-columns: 1fr; height: auto; }
+      .ps-item { height: 200px; }
+      footer { flex-direction: column; gap: 2rem; text-align: center; }
+      .contact-detail { flex-direction: column; gap: 2rem; align-items: center; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .selene-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .selene-image { max-width: 480px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">Selene Experiences</a>
+    <ul class="nav-links">
+      <li><a href="#manifesto">Filosofía</a></li>
+      <li><a href="#collections">Colecciones</a></li>
+      <li><a href="#destinations">El Lienzo</a></li>
+      <li><a href="#proceso">El Proceso</a></li>
+      <li><button class="nav-cta" data-modal="open" style="background:none;border:1px solid rgba(255,255,255,0.3);cursor:pointer;font-family:var(--font-sc);font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--s-marfil);padding:0.55rem 1.5rem">Iniciar el Diálogo</button></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <div class="hero-bg-fallback"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Argentina & Sudamérica — Desde 1994</p>
+      <h1 class="hero-title">
+        El Arte de<br/>
+        conocer Argentina.<br/>
+        <em>Curada para usted.</em>
+      </h1>
+      <p class="hero-subtitle">
+        Glaciares, cataratas, viñedos y cultura porteña de clase mundial: todo en un solo país.
+        Con más de 30 años en el terreno, diseñamos su journey de forma completamente personalizada.
+        Su única tarea es sentir.
+      </p>
+      <div>
+        <button class="btn-primary" data-modal="open" style="border:none;cursor:pointer">Iniciar el Diálogo</button>
+        <a href="#manifesto" class="btn-ghost">Nuestra Filosofía</a>
+      </div>
+    </div>
+    <div class="hero-line">
+      <span class="hl-label">Descender</span>
+      <span class="hl-bar"></span>
+    </div>
+  </section>
+
+  <!-- ─── GALLERY STRIP ─── -->
+  <!-- Buenos Aires · Patagonia · Mendoza — 3 imágenes de Argentina -->
+  <div class="gallery-strip">
+    <div class="gs-item">
+      <a href="#dest-ba">
+        <img src="https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=1000&q=80&auto=format&fit=crop&crop=center" alt="Buenos Aires" loading="lazy" />
+      </a>
+      <span class="gs-label">Buenos Aires</span>
+    </div>
+    <div class="gs-item">
+      <a href="#dest-patagonia">
+        <img src="https://images.unsplash.com/photo-1617548437735-92d875423353?w=700&q=80&auto=format&fit=crop&crop=center" alt="Patagonia" loading="lazy" />
+      </a>
+      <span class="gs-label">Patagonia</span>
+    </div>
+    <div class="gs-item">
+      <a href="#dest-mendoza">
+        <img src="https://images.unsplash.com/photo-1665254369274-4b459f3ce48c?w=700&q=80&auto=format&fit=crop&crop=center" alt="Mendoza" loading="lazy" />
+      </a>
+      <span class="gs-label">Mendoza</span>
+    </div>
+  </div>
+
+  <!-- ─── MANIFESTO ─── -->
+  <section id="manifesto">
+    <div class="section-inner">
+      <div class="manifesto-grid">
+
+        <div>
+          <div class="reveal">
+            <div class="eyebrow">Quiénes Somos</div>
+            <h2 class="section-title">
+              No somos una<br/>
+              agencia.<br/>
+              Somos sus<br/>
+              <em>intérpretes.</em>
+            </h2>
+          </div>
+          <div class="stat-block reveal reveal-delay-1">
+            <div class="stat-number">30</div>
+            <div class="stat-label">Años de presencia real en el terreno</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="manifesto-quote reveal">
+            <p>"El verdadero lujo no es lo que se ve desde afuera. Es el silencio, la fluidez, la certeza de que alguien que conoce profundamente este mundo ya resolvió todo."</p>
+          </div>
+
+          <div class="body-text reveal reveal-delay-1" style="margin-top:2.5rem">
+            Selene Experiences nació de una convicción: que los grandes viajeros no buscan catálogos,
+            sino <strong>complicidad intelectual</strong>. Llevamos más de tres décadas construyendo
+            un capital de acceso, confianza y conocimiento que ninguna plataforma digital puede replicar.
+          </div>
+          <div class="body-text reveal reveal-delay-2">
+            Sabemos el nombre del sommelier que abre su bodega privada solo para nosotros en Luján
+            de Cuyo. Conocemos al capitán que navega los canales fueguinos cuando la niebla cede.
+            Tenemos la llave de los salones que no aparecen en ninguna guía.
+          </div>
+
+          <div class="pillars reveal reveal-delay-2">
+            <div class="pillar">
+              <div class="pillar-num">I</div>
+              <div>
+                <div class="pillar-title">Acceso Privilegiado</div>
+                <div class="pillar-text">Tres décadas de relaciones construidas con paciencia y reciprocidad. Las puertas que abrimos no se encuentran en ningún motor de reservas.</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-num">II</div>
+              <div>
+                <div class="pillar-title">Sensibilidad Cultural</div>
+                <div class="pillar-text">No diseñamos viajes; componemos experiencias que revelan el alma de un lugar. Cada Itinerario de Autor nace de una escucha profunda.</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-num">III</div>
+              <div>
+                <div class="pillar-title">La Tranquilidad de lo Resuelto</div>
+                <div class="pillar-text">La mayor forma de lujo es la ausencia completa de incertidumbre. Nuestros clientes viajan con la certeza de que todo ya fue pensado.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SELENE (FUNDADORA) ─── -->
+  <section id="selene">
+    <div class="section-inner">
+      <div class="selene-grid">
+        <div class="selene-image reveal">
+          <img src="selene.png" alt="Selene Delgado" loading="lazy" />
+        </div>
+        <div class="selene-content">
+          <div class="reveal">
+            <div class="eyebrow">Quién es Selene</div>
+            <h2 class="section-title">
+              La curadora,<br/>
+              en <em>primera persona.</em>
+            </h2>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <p class="body-text">
+              Detrás de cada journey hay una persona. <strong>Selene Delgado</strong> ha pasado más de tres décadas
+              recorriendo Argentina con una sola obsesión: entender qué hace que un viaje sea irrepetible.
+            </p>
+            <p class="body-text">
+              Su trabajo es la síntesis de miles de horas en el terreno —caminando glaciares, durmiendo en estancias,
+              conociendo personalmente al sommelier que abre su bodega privada, al capitán que navega los canales fueguinos,
+              al guía que lee la montaña como un libro abierto.
+            </p>
+            <p class="body-text">
+              Cuando usted viaja con Selene Experiences, <strong>viaja con ella.</strong> Cada itinerario lleva su firma,
+              su criterio, su red de afectos construida en treinta años de presencia real.
+            </p>
+          </div>
+          <div class="selene-signature reveal reveal-delay-2">
+            <div class="sig-line"></div>
+            <div class="sig-name">Selene Delgado</div>
+            <div class="sig-role">Fundadora & Curadora</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHOTO FULL-WIDTH: Andes desde Mendoza ─── -->
+  <div class="photo-section">
+    <div class="celeste-bar"></div>
+    <!-- Cordillera de los Andes / viñedos Mendoza -->
+    <img src="https://images.unsplash.com/photo-1626368185783-7c928d6f0133?w=1800&q=85&auto=format&fit=crop&crop=center" alt="Los Andes" />
+    <div class="overlay">
+      <div class="overlay-text">
+        <div class="overlay-eyebrow">El Escenario</div>
+        <div class="overlay-title">
+          La Cordillera que lo cambia todo.
+        </div>
+        <div class="overlay-sub">
+          Argentina no es un destino. Es un continente de emociones
+          comprimido en un solo país: desde la selva tropical hasta el hielo eterno.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ─── COLLECTIONS ─── -->
+  <section id="collections">
+    <div class="section-inner">
+      <div class="collections-intro reveal">
+        <div class="eyebrow">Nuestras Propuestas</div>
+        <h2 class="section-title">
+          Colecciones<br/>
+          <em>Privadas</em>
+        </h2>
+        <p class="body-text">No ofrecemos catálogos. Cada pieza de nuestro trabajo es un Itinerario de Autor: concebido para una sola persona, una sola familia, un solo momento irrepetible.</p>
+      </div>
+
+      <div class="collections-grid">
+        <div class="collection-card reveal">
+          <div class="card-num">01</div>
+          <div class="card-label">Itinerario de Autor</div>
+          <div class="card-title">El Diseño<br/>Singular</div>
+          <div class="card-text">Una conversación que se transforma en ruta. Cada Itinerario de Autor se crea desde cero a partir de sus intereses, ritmos y sensibilidades. Nada es estándar. Todo es suyo.</div>
+          <button class="card-arrow-btn" data-modal="open">Comenzar el diálogo</button>
+        </div>
+        <div class="collection-card reveal reveal-delay-1">
+          <div class="card-num">02</div>
+          <div class="card-label">Colección Curada</div>
+          <div class="card-title">Accesos que no Existen<br/>en Guía Alguna</div>
+          <div class="card-text">Maridajes privados en bodegas cerradas al público. Cenas en estancias centenarias. Travesías en silencio por territorios que pocos conocen. Solo para nuestros clientes.</div>
+          <button class="card-arrow-btn" data-modal="open">Explorar accesos</button>
+        </div>
+        <div class="collection-card card-malbec reveal reveal-delay-2">
+          <div class="card-num">03</div>
+          <div class="card-label">Journey Exclusivo</div>
+          <div class="card-title">El Gran<br/>Viaje Sur</div>
+          <div class="card-text">De Buenos Aires a la Patagonia profunda: un journey que atraviesa la pampa, los Andes, la estepa y el hielo eterno. Nuestro legado editorial convertido en ruta.</div>
+          <button class="card-arrow-btn" data-modal="open">Ver el journey</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DESTINATIONS ─── -->
+  <section id="destinations">
+    <div class="section-inner">
+      <div class="dest-header reveal">
+        <div class="eyebrow">El Lienzo</div>
+        <h2 class="section-title">
+          Argentina,<br/>
+          interpretada.
+        </h2>
+        <p class="body-text">No describimos accidentes geográficos. Revelamos la textura de los lugares: su luz, su silencio, su conversación secreta con quienes saben escuchar.</p>
+      </div>
+    </div>
+
+    <div class="dest-list">
+
+      <!-- 01 Buenos Aires -->
+      <div id="dest-ba" class="dest-item reveal">
+        <div class="dest-image">
+          <!-- Teatro Colón / BA clásica -->
+          <img src="https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=900&q=80&auto=format&fit=crop&crop=center" alt="Buenos Aires" loading="lazy" />
+        </div>
+        <div class="dest-content">
+          <div class="dest-num">01</div>
+          <div class="dest-name">Buenos Aires</div>
+          <div class="dest-region">La Reina del Plata — Argentina</div>
+          <p class="dest-text">
+            Una ciudad que vive entre Haussmann y el bandoneón: París con el pulso del río. Buenos Aires es elegancia sedimentada en sus cafés notables, sus casas de teatro y sus galerías de barrio que guardan arte sin pretensión. Para Selene, esta ciudad existe en sus capas ocultas: la sala de ensayo donde un maestro del tango recibe solo a quienes son presentados, la bóveda privada de una galería cuyo dueño abre sus puertas solo para los nuestros.
+          </p>
+          <div class="dest-tags">
+            <span class="tag tag-celeste">Arte Privado</span>
+            <span class="tag tag-celeste">Alta Gastronomía</span>
+            <span class="tag">Tango de Autor</span>
+            <span class="tag">Arquitectura</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Mendoza — reverse -->
+      <div id="dest-mendoza" class="dest-item reverse reveal">
+        <div class="dest-image">
+          <!-- Viñedos Mendoza + Andes -->
+          <img src="https://images.unsplash.com/photo-1665254369274-4b459f3ce48c?w=900&q=80&auto=format&fit=crop&crop=center" alt="Mendoza" loading="lazy" />
+        </div>
+        <div class="dest-content">
+          <div class="dest-num">02</div>
+          <div class="dest-name">Mendoza</div>
+          <div class="dest-region">Alta Montaña — Argentina</div>
+          <p class="dest-text">
+            A los pies de la Cordillera de los Andes, donde el silencio tiene el sabor del Malbec y la luz del atardecer convierte los viñedos en oro. Mendoza no se experimenta desde una bodega comercial: se experimenta en la barricada de un enólogo que dejó Europa para buscar aquí la expresión máxima del terruño. Selene diseña catas íntimas, mesas de gastronomía de autor bajo las estrellas y acceso al mundo privado de las familias vitivinícolas que construyeron esta región con sus manos.
+          </p>
+          <div class="dest-tags">
+            <span class="tag tag-malbec">Alta Enología</span>
+            <span class="tag tag-malbec">Catas Privadas</span>
+            <span class="tag">Gastronomía de Autor</span>
+            <span class="tag">Spa & Bienestar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Patagonia -->
+      <div id="dest-patagonia" class="dest-item reveal">
+        <div class="dest-image">
+          <!-- Fitz Roy / Torres Patagónicas -->
+          <img src="https://images.unsplash.com/photo-1637580980556-085dee659c7e?w=900&q=80&auto=format&fit=crop&crop=center" alt="Patagonia" loading="lazy" />
+        </div>
+        <div class="dest-content">
+          <div class="dest-num">03</div>
+          <div class="dest-name">Bariloche<br/>& Patagonia</div>
+          <div class="dest-region">El Fin del Mundo — Argentina</div>
+          <p class="dest-text">
+            Hay un silencio en la Patagonia que no existe en ningún otro lugar del planeta. Un silencio que pesa, que sana, que obliga a estar. Aquí, la inmensidad no es vacío: es presencia pura. Selene accede a lodges de alma que se funden con el bosque nativo, a guías de montaña que son también filósofos del territorio, a rutas de trekking privadas donde el único sonido es el viento sobre el glaciar. El lujo aquí no es abundancia; es la sofisticación del silencio absoluto.
+          </p>
+          <div class="dest-tags">
+            <span class="tag">Lodges Exclusivos</span>
+            <span class="tag">Naturaleza Virgen</span>
+            <span class="tag">Travesías Privadas</span>
+            <span class="tag">Fly Fishing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Iguazú — reverse -->
+      <div id="dest-iguazu" class="dest-item reverse reveal">
+        <div class="dest-image">
+          <!-- Cataratas del Iguazú -->
+          <img src="https://images.unsplash.com/photo-1657386363865-f30779784410?w=900&q=80&auto=format&fit=crop&crop=center" alt="Iguazú" loading="lazy" />
+        </div>
+        <div class="dest-content">
+          <div class="dest-num">04</div>
+          <div class="dest-name">Misiones<br/>& Cataratas</div>
+          <div class="dest-region">Selva Subtropical — Argentina</div>
+          <p class="dest-text">
+            La selva no se observa: se escucha, se respira, se infiltra. Las Cataratas del Iguazú son uno de los pocos fenómenos naturales que realmente superan toda expectativa, y Selene garantiza vivirlas sin la mediación del turismo masivo. Un amanecer privado frente a la Garganta del Diablo con el parque aún en silencio. Una noche en un lodge sustentable de diseño donde el verde lo envuelve todo. Una expedición por senderos que pocos conocen, hacia rincones donde la fuerza del agua y el canto de las aves construyen una experiencia que no se olvida.
+          </p>
+          <div class="dest-tags">
+            <span class="tag">Acceso Exclusivo</span>
+            <span class="tag">Lodges de Diseño</span>
+            <span class="tag">Sustentabilidad</span>
+            <span class="tag">Selva Tropical</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── PHOTO STRIP INTERLUDE ─── -->
+  <div class="photo-strip">
+    <div class="ps-item">
+      <!-- Estepa patagónica -->
+      <img src="https://images.unsplash.com/photo-1716467164365-5a9ab0c3fe99?w=700&q=80&auto=format&fit=crop&crop=center" alt="Estepa Patagónica" loading="lazy" />
+      <span class="ps-label">Estepa Patagónica</span>
+    </div>
+    <div class="ps-item">
+      <!-- Ushuaia / Canal Beagle -->
+      <img src="https://images.unsplash.com/photo-1615656543085-130a54570311?w=700&q=80&auto=format&fit=crop&crop=center" alt="Ushuaia" loading="lazy" />
+      <span class="ps-label">Canal Beagle</span>
+    </div>
+    <div class="ps-item">
+      <!-- Salta / Quebrada -->
+      <img src="https://images.unsplash.com/photo-1590068045908-5acf54e48a6f?w=700&q=80&auto=format&fit=crop&crop=center" alt="Salta" loading="lazy" />
+      <span class="ps-label">Salta & el NOA</span>
+    </div>
+  </div>
+
+  <!-- ─── PROCESS ─── -->
+  <section id="proceso">
+    <div class="section-inner">
+      <div class="process-header reveal">
+        <div class="eyebrow">El Proceso Selene</div>
+        <h2 class="section-title">
+          Diseñar un viaje<br/>
+          con <em>nosotros.</em>
+        </h2>
+        <p class="body-text">Todo gran viaje comienza con una conversación honesta. Así es como trabajamos.</p>
+      </div>
+      <div class="process-steps">
+        <div class="step reveal">
+          <div class="step-dot"></div>
+          <div class="step-num">I</div>
+          <div class="step-title">El Diálogo</div>
+          <div class="step-text">Una consulta privada —presencial o a distancia— donde exploramos sus intereses, ritmos, expectativas y sueños. No hay formularios. Solo escucha genuina.</div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-dot"></div>
+          <div class="step-num">II</div>
+          <div class="step-title">La Curaduría</div>
+          <div class="step-text">Nuestro equipo diseña un Itinerario de Autor a su medida: activaciones exclusivas, alojamientos seleccionados a mano, accesos que no figuran en ninguna guía.</div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-dot"></div>
+          <div class="step-num">III</div>
+          <div class="step-title">La Experiencia</div>
+          <div class="step-text">Usted viaja. Nosotros permanecemos en silencio —invisibles, disponibles— para que cada momento fluya con la precisión de lo perfectamente orquestado.</div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-dot"></div>
+          <div class="step-num">IV</div>
+          <div class="step-title">El Legado</div>
+          <div class="step-text">Guardamos la memoria de su viaje. Cada experiencia Selene construye un archivo personal que enriquece y profundiza cada journey siguiente.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contacto">
+    <div class="contacto-bg"></div>
+    <div class="contact-inner">
+      <div class="contact-ornament"></div>
+      <div class="reveal">
+        <div class="eyebrow" style="text-align:center">Consulta Privada</div>
+        <h2 class="contact-title">
+          El siguiente capítulo<br/>
+          comienza con una<br/>
+          <em>palabra.</em>
+        </h2>
+        <p class="contact-text">
+          Selene Experiences no atiende por teléfono en horarios de oficina.
+          Atiende a sus clientes como lo que son: personas que merecen una conversación real.
+          Le invitamos a iniciar el diálogo. Todo lo que necesita decir es que está listo para comenzar.
+        </p>
+      </div>
+      <div class="contact-actions reveal reveal-delay-1">
+        <button class="btn-primary" data-modal="open" style="border:none;cursor:pointer">Iniciar el Diálogo</button>
+        <a href="https://wa.me/5491136904820" class="btn-ghost" style="opacity:1;animation:none">WhatsApp Privado</a>
+      </div>
+
+      <div class="form-divider"></div>
+      <div class="contact-detail reveal reveal-delay-2">
+        <div>
+          <div class="detail-label">Oficina Principal</div>
+          <div class="detail-value">Buenos Aires, Argentina</div>
+        </div>
+        <div>
+          <div class="detail-label">WhatsApp Privado</div>
+          <div class="detail-value"><a href="https://wa.me/5491136904820" style="color:inherit;text-decoration:none">+54 9 11 3690 4820</a></div>
+        </div>
+        <div>
+          <div class="detail-label">Idiomas</div>
+          <div class="detail-value">Español · English · Português</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MODAL CONTACTO ─── -->
+  <div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="modal-close" data-modal="close">Cerrar</button>
+      <div class="modal-eyebrow">Consulta Privada</div>
+      <h2 class="modal-title">Iniciar el <em>Diálogo</em></h2>
+      <p class="modal-sub">Cuéntenos lo que busca. Nos ocupamos de todo lo demás.</p>
+
+      <form class="contact-form" action="mailto:seledelgado@gmail.com" method="POST" enctype="text/plain">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="m-nombre">Nombre completo</label>
+            <input type="text" id="m-nombre" name="Nombre" placeholder="Su nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="m-correo">Correo electrónico</label>
+            <input type="email" id="m-correo" name="Correo" placeholder="su@correo.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="m-tel">WhatsApp <span style="opacity:.45;font-size:.9em">(opcional)</span></label>
+            <input type="tel" id="m-tel" name="WhatsApp" placeholder="+1 000 000 0000" />
+          </div>
+          <div class="form-group">
+            <label for="m-fecha">Fechas estimadas</label>
+            <input type="text" id="m-fecha" name="Fechas" placeholder="Ej: Octubre 2026" />
+          </div>
+        </div>
+        <div class="form-checks-group">
+          <span class="form-checks-label">Destinos de interés</span>
+          <div class="form-checks">
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Buenos Aires" /><span class="check-box"></span><span class="check-text">Buenos Aires</span></label>
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Mendoza" /><span class="check-box"></span><span class="check-text">Mendoza</span></label>
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Patagonia" /><span class="check-box"></span><span class="check-text">Patagonia</span></label>
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Iguazú" /><span class="check-box"></span><span class="check-text">Iguazú</span></label>
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Salta y NOA" /><span class="check-box"></span><span class="check-text">Salta & NOA</span></label>
+            <label class="form-check"><input type="checkbox" name="Destinos" value="Sur Profundo" /><span class="check-box"></span><span class="check-text">Sur Profundo</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="m-mensaje">Cuéntenos qué está buscando</label>
+          <textarea id="m-mensaje" name="Mensaje" placeholder="Sus intereses, ritmos, lo que verdaderamente busca sentir..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-logo">Selene Experiences</div>
+    <!-- Detalle bandera argentina sutil -->
+    <div class="footer-celeste">
+      <span class="fc-bar celeste"></span>
+      <span class="fc-bar blanco"></span>
+      <span class="fc-bar celeste"></span>
+      <div class="footer-copy" style="margin-left:1rem">© 2026 Selene Experiences</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacidad</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- ─── JS ─── -->
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => obs.observe(el));
+
+    // Modal
+    const modal = document.getElementById('contactModal');
+    function openModal() {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('[data-modal="open"]').forEach(el => {
+      el.addEventListener('click', e => { e.preventDefault(); openModal(); });
+    });
+    document.querySelectorAll('[data-modal="close"]').forEach(el => {
+      el.addEventListener('click', closeModal);
+    });
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
